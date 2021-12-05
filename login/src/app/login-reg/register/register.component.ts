@@ -43,7 +43,8 @@ export class RegisterComponent implements OnInit {
         next: (res) => {
           if(res['success']){
           this.lstFields = res['data']
-          this.form = this.toFormGroup(this.lstFields)
+          this.form = this.toFormGroup(this.lstFields);
+          this.form.controls['user_gender'].setValue('Male');
 
 
           }

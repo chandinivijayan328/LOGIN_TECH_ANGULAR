@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
             next: (res) => {
                 if(res['success']){
                   localStorage.setItem("email",this.f.email.value)
-                  this.router.navigate(['/user'], { relativeTo: this.route });
+                  this.router.navigate(['/login/register'], { relativeTo: this.route });
 
                 }
                 else{
