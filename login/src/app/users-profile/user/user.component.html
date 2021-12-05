@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="lstProfileData.length>0">
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/user" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+        <!-- <a class="nav-item nav-link" routerLink="/user" routerLinkActive="active">Users</a> -->
+        <a class="nav-item nav-link" (click)="logout()">Logout</a>
+    </div>
+</nav>
+
+<div class="p-4">
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+        <div class="row">
+            <!-- <div class="col-md-1">
+                <img src="../../../assets/images/profile.png" alt="" style="height: 15%">
+            </div> -->
+            <div class="col-md-12">
+                <h4>Hi <span *ngIf="lstProfileData.length>0">{{dctProfileData.first_name}} {{dctProfileData.last_name}}</span></h4>
+            </div>
+        </div>
+    </div>
+</div>
+        <div class="card">
+            <div class="card-body">
+
+
+        <div class="row" *ngIf="lstProfileData.length>0">
+
+            <div class="col-md-6"><p><b> First Name :</b> {{dctProfileData.first_name}}</p></div>
+            <div class="col-md-6"><p><b> Last Name :</b> {{dctProfileData.last_name}}</p></div>
+            <div class="col-md-6"><p><b> Email :</b> {{dctProfileData.email}}</p></div>
+            <div class="col-md-6"><p><b> Phone :</b> {{dctProfileData.phone}}</p></div>
+            <div class="col-md-6"><p><b> Address :</b> {{dctProfileData.address}}</p></div>
+            <div class="col-md-6"><p><b> Gender :</b> {{dctProfileData.gender}}</p></div>
+            <div class="col-md-6"><p><b> Job Role :</b> {{dctProfileData.job_role}}</p></div>
+
+        </div>
+    </div>
+</div>
+    </div>
+</div>

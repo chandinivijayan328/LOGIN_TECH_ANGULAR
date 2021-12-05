@@ -1,0 +1,80 @@
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 mt-5">
+
+
+                <div class="card">
+                    <h4 class="card-header">Login</h4>
+                    <div class="card-body">
+                        <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!blnForgot" >
+                            <div class="form-group m-top " >
+                                <label for="email">Email</label>
+                                <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                    <div *ngIf="f.email.errors.required">Email is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group m-top">
+                                <label for="password">Password</label>
+                                <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                    <div *ngIf="f.password.errors.required">Password is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group m-top">
+                                <button [disabled]="loading" class="btn btn-primary">
+                                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                    Login
+                                </button>
+                                <button class="btn btn-secondary" (click)="resetForm()" style="margin-left: 5px">
+                                    <!-- <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> -->
+                                    Cancel
+                                </button>
+                                <a routerLink="../register" class="btn btn-link">Register</a>
+                                <a (click)="blnForgot=!blnForgot" class="btn btn-link">Forgot Password</a>
+
+                            </div>
+                        </form>
+
+                        <form [formGroup]="forgotFform" *ngIf="blnForgot" (ngSubmit)="onSubmit()">
+                            <div class="row">
+
+                            <div class="form-group col-sm-12 m-top">
+                                <label for="email">Email</label>
+                                <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && fp.email.errors }" />
+                                <div *ngIf="submitted && fp.email.errors" class="invalid-feedback">
+                                    <div *ngIf="fp.email.errors.required">Email is required</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-12 m-top">
+                                <button [disabled]="nextClicked" class="btn btn-primary" type="submit" (click)="nextClicked=!nextClicked" >
+                                    <!-- <span *ngIf="nextClicked" class="spinner-border spinner-border-sm mr-1"></span> -->
+                                    Next
+                                </button>
+                            </div>
+
+                                <div class="form-group col-sm-3 m-top" *ngFor="let input of formInput;  index as i" >
+                                    <ng-container *ngIf="nextClicked" >
+                                        <input #formRow type="text" formControlName="{{input}}" class="form-control" maxlength="1" (keyup)="keyUpEvent($event, i)">
+                                    </ng-container>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group m-top">
+                                <!-- <button *ngIf="nextClicked" class="btn btn-primary">
+                                    Reset Password
+                                </button> -->
+                                <button class="btn btn-link" (click)="blnForgot=!blnForgot;nextClicked=!nextClicked">Back</button>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

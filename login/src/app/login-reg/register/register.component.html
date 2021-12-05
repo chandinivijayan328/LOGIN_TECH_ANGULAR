@@ -1,0 +1,92 @@
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 mt-5">
+                <div class="card">
+                    <h4 class="card-header">Register</h4>
+                    <div class="card-body">
+                        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                            <div class="form-group"  *ngFor="let fieldItem of lstFields" class="form-row">
+                                <div *ngIf="fieldItem.inputType == 'textfield'" class="m-top">
+
+                                <label [attr.for]="fieldItem.name">{{fieldItem.label}}</label>
+                                <input [type]="fieldItem.name == 'user_password' ? 'password' : 'text'" formControlName="{{fieldItem.name}}" class="form-control" [ngClass]="{ 'is-invalid': submitted && f[fieldItem.name].errors }"/>
+                                <ng-container *ngFor="let valdn of fieldItem.validations;let k=index">
+                                    <div *ngIf="submitted && f[fieldItem.name].errors" class="invalid-feedback">
+                                        <div *ngIf="f[fieldItem.name].errors?.required && fieldItem['validations'][k].name=='required'">{{valdn.message}}</div>
+                                        <div *ngIf="f[fieldItem.name].errors?.pattern && fieldItem['validations'][k].name=='pattern'">{{valdn.message}}</div>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+                            <div *ngIf="fieldItem.inputType == 'email'"  class="m-top">
+
+                                <label [attr.for]="fieldItem.name">{{fieldItem.label}}</label>
+                                <input type="email" formControlName="{{fieldItem.name}}" class="form-control" [ngClass]="{ 'is-invalid': submitted && f[fieldItem.name].errors }"> 
+                                <ng-container *ngFor="let valdn of fieldItem.validations;let k=index">
+                                    <div *ngIf="submitted && f[fieldItem.name].errors" class="invalid-feedback">
+                                        <div *ngIf="f[fieldItem.name].errors?.required && fieldItem['validations'][k].name=='required'">{{valdn.message}}</div>
+                                        <div *ngIf="f[fieldItem.name].errors?.pattern && fieldItem['validations'][k].name=='pattern'">{{valdn.message}}</div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <div *ngIf="fieldItem.inputType == 'textarea'"  class="m-top">
+
+                                <label [attr.for]="fieldItem.name">{{fieldItem.label}}</label>
+                                <textarea name="{{fieldItem.name}}" formControlName="{{fieldItem.name}}" class="form-control"  id="" cols="30" rows="5" [ngClass]="{ 'is-invalid': submitted && f[fieldItem.name].errors }"></textarea>
+                                <ng-container *ngFor="let valdn of fieldItem.validations;let k=index">
+                                    <div *ngIf="submitted && f[fieldItem.name].errors" class="invalid-feedback">
+                                        <div *ngIf="f[fieldItem.name].errors?.required && fieldItem['validations'][k].name=='required'">{{valdn.message}}</div>
+                                        <div *ngIf="f[fieldItem.name].errors?.pattern && fieldItem['validations'][k].name=='pattern'">{{valdn.message}}</div>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+                            <div *ngIf="fieldItem.inputType == 'radio'"  class="m-top">
+
+                                <label *ngFor="let item of fieldItem.options;let r=index"  [attr.for]="fieldItem.name">
+                                    <input type="radio"  formControlName="{{fieldItem.name}}"  value="{{item.value}}"  [ngClass]="{ 'is-invalid': submitted && f[fieldItem.name].errors }"
+                                    [checked]="item.checked">
+                                    {{item.value}}
+                                </label>
+                                <ng-container *ngFor="let valdn of fieldItem.validations;let k=index">
+                                    <div *ngIf="submitted && f[fieldItem.name].errors" class="invalid-feedback">
+                                        <div *ngIf="f[fieldItem.name].errors?.required && fieldItem['validations'][k].name=='required'">{{valdn.message}}</div>
+                                        <div *ngIf="f[fieldItem.name].errors?.pattern && fieldItem['validations'][k].name=='pattern'">{{valdn.message}}</div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <div *ngIf="fieldItem.inputType == 'dropdown'"  class="m-top">
+
+                                <label [attr.for]="fieldItem.name">{{fieldItem.label}}</label>
+                                <select formControlName="{{fieldItem.name}}" id="{{fieldItem.name}}"  [ngClass]="{ 'is-invalid': submitted && f[fieldItem.name].errors }" >
+                                <option *ngFor="let order of fieldItem.options; let i = index" [value]="fieldItem.options[i].value">
+                                    {{order.value}}
+                                </option>
+                                </select>
+                                <ng-container *ngFor="let valdn of fieldItem.validations;let k=index">
+                                    <div *ngIf="submitted && f[fieldItem.name].errors" class="invalid-feedback">
+                                        <div *ngIf="f[fieldItem.name].errors?.required && fieldItem['validations'][k].name=='required'">{{valdn.message}}</div>
+                                        <div *ngIf="f[fieldItem.name].errors?.pattern && fieldItem['validations'][k].name=='pattern'">{{valdn.message}}</div>
+                                    </div>
+                                </ng-container>
+                            </div>
+
+
+
+                            </div>
+                            <div class="form-group"  class="m-top">
+                                <button [disabled]="loading" class="btn btn-primary">
+                                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                    Register
+                                </button>
+                                <a routerLink="../login" class="btn btn-link">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
